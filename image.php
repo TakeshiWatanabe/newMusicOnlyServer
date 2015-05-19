@@ -65,9 +65,9 @@
 <body>
 <p><?php
     
-    if (is_uploaded_file($_FILES["iosMusic"]["image"])) {
-        if (move_uploaded_file($_FILES["iosMusic"]["image"], "./" . $_FILES["iosMusic"]["image"])) {
-            echo $_FILES["iosMusic"]["image"] . "をアップロードしました。";
+    if (is_uploaded_file($_FILES["iosMusic"]["userImage"])) {
+        if (move_uploaded_file($_FILES["iosMusic"]["userImage"], "./" . $_FILES["iosMusic"]["userImage"])) {
+            echo $_FILES["iosMusic"]["userImage"] . "をアップロードしました。";
         } else {
             echo "ファイルをアップロードできません。";
         }
