@@ -86,7 +86,7 @@
 	// データの追加(INSERT)
 	//print('<p>iosMusicデータを追加します。</p>');
 
-	$sql = "INSERT INTO users (name,country,genre) VALUES ('$name', '$country', '$genre')";
+	$sql = "INSERT INTO users (name,country,genre,created) VALUES ('$name', '$country', '$genre',NOW())";
 	$result_flag = mysql_query($sql);
 
 	//var_dump($sql);
