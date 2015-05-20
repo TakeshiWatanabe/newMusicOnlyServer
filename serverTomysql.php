@@ -44,7 +44,7 @@
 	mysql_set_charset('utf8');
 
 	// 変数を用意
-	//$id       = $_GET['id'];
+	//$id         = 0;
 	$name       = $_GET['name'];
 	$country    = $_GET['country'];
 	$genre      = $_GET['genre'];
@@ -91,8 +91,9 @@
 
 	//var_dump($sql);
 
-	$id = mysql_insert_id($result_flag);
+	$id = mysql_insert_id();
 
+	//var_dump($id);
 
 	if (!$result_flag) {
 	    //die('INSERTクエリーが失敗しました。'.mysql_error());
@@ -100,22 +101,26 @@
 
 	//print('<p>iosMusic追加後のデータを取得します。</p>');
 
-	$sql_select = "SELECT name,country,genre FROM users WHERE id= $id";
+	$sql_select = "SELECT id,name,country,genre FROM users WHERE id= $id";
 	$result = mysql_query($sql_select);
 
 	//var_dump($sql_select);
 
 	if ($result) {
-	    //die('SELECTクエリーが失敗しました。'.mysql_error());
+	    //せいこう
 	     //var_dump($result);
 	     //var_dump('g');
 	    // echo $result;
-	}else{
-		//var_dump('gy');
+
 		//jsonに変更して表示
-		$arr = array('name' => $name, 'country' => $country, 'genre' => $genre);
+		$arr = array('id' => $id, 'name' => $name, 'country' => $country, 'genre' => $genre);
 		//echo json_encode($result);
 		echo json_encode($arr);
+
+	}else{
+		//しっぱい
+
+		//var_dump('gy');
 	}
 
 	// while ($row = mysql_fetch_assoc($result)) {
