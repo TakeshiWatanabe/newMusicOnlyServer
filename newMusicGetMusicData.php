@@ -29,21 +29,21 @@
 
 	//var_dump($result);
 	while ($row = mysql_fetch_assoc($result)) {
-	    print('<p>');
-	    print('userId='       .$row['userId']);
-	    print(',userName='    .$row['userName']);
-	    print(',musicId='     .$row['musicId']);
-	    print(',musicTittle=' .$row['musicTittle']);
-	    print(',artistName='  .$row['artistName']);
-	    print(',jacketUrl='   .$row['jacketUrl']);
-	    print(',previewUrl='  .$row['previewUrl']);
-	    print('</p>');
+	    // print('<p>');
+	    // print('userId='       .$row['userId']);
+	    // print(',userName='    .$row['userName']);
+	    // print(',musicId='     .$row['musicId']);
+	    // print(',musicTittle=' .$row['musicTittle']);
+	    // print(',artistName='  .$row['artistName']);
+	    // print(',jacketUrl='   .$row['jacketUrl']);
+	    // print(',previewUrl='  .$row['previewUrl']);
+	    // print('</p>');
 	}
 	
 	//var_dump($row);
-	// $sql = "INSERT INTO musics (userId,userName,musicId,musicTittle,artistName,jacketUrl,previewUrl,created) VALUES ('$userId', '$userName', '$musicId', '$musicTittle', '$artistName', '$jacketUrl', '$previewUrl', NOW())";
-	// $result_flag = mysql_query($sql);
-
+	$sql = "INSERT INTO musics (userId,userName,musicId,musicTittle,artistName,jacketUrl,previewUrl,created) VALUES ('$userId', '$userName', '$musicId', '$musicTittle', '$artistName', '$jacketUrl', '$previewUrl', NOW())";
+	$result_flag = mysql_query($sql);
+	//var_dump($sql);
 	// var_dump($sql);
 
 	//$userId = mysql_insert_id();
@@ -58,7 +58,7 @@
 	// $result = mysql_query($sql_select);
 
 	if ($result) {
-		//var_dump($userId);
+		var_dump($result);
 		//jsonに変更して表示
 		$arr = array('userId' => $userId, 'userName' => $userName, 'musicId' => $musicId, 'musicTittle' => $musicTittle, 'artistName' => $artistName, 'jacketUrl' => $jacketUrl, 'previewUrl' => $previewUrl);
 		echo json_encode($arr);
