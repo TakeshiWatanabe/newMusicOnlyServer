@@ -46,7 +46,7 @@
 
 	// var_dump($sql);
 
-	// $userId = mysql_insert_id();
+	//$userId = mysql_insert_id();
 
 	// //var_dump($id);
 
@@ -58,7 +58,7 @@
 	// $result = mysql_query($sql_select);
 
 	if ($result) {
-		var_dump($userId);
+		//var_dump($userId);
 		//jsonに変更して表示
 		$arr = array('userId' => $userId, 'userName' => $userName, 'musicId' => $musicId, 'musicTittle' => $musicTittle, 'artistName' => $artistName, 'jacketUrl' => $jacketUrl, 'previewUrl' => $previewUrl);
 		echo json_encode($arr);
