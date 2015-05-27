@@ -1,31 +1,22 @@
 <?php
-require_once('config.php');
-require_once('functions.php');
 
-mb_language("uni");
-mb_internal_encoding("utf-8"); //内部文字コードを変更
-mb_http_input("auto");
-mb_http_output("utf-8");
+//データベースへの接続
+$db = mysqli_connect('localhost', 'root', 'camp2015', 'iosMusic') or die(mysqli_connect_error());
+mysqli_set_charset($db, 'utf8');
 
-$dbh = connectDb();
 
-$sth = $dbh->prepare("SELECT * FROM musics");
-$sth->execute();
+//データの取得
+$sql = 'select * from musics';
+$recordset = mysqli_query($db, $sql) or die(mysqli_error($db));
+$allEventData = array();
+while ($eventData = mysqli_fetch_assoc($recordset)){
 
-$userData = array();
-
-while($row = $sth->fetch(PDO::FETCH_ASSOC)){
-    $userData[]=array(
-    'userId'=>$row['userId'],
-    'userName'=>$row['userName'],
-    'musicId'=>$row['musicId']
-    // 'musicTittle'=>$row['musicTittle'],
-    // 'artistName'=>$row['artistName'],
-    // 'jacketUrl'=>$row['jacketUrl'],
-    // 'previewUrl'=>$row['previewUrl']
-    );	
+$allEventData[] = $eventData; 	
 }
 
+	
+
 //jsonとして出力
-header('Content-type: application/json');
-echo json_encode($userData);
+$allEventData_encode = json_encode($allEventData, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+
+echo $allEventData_encode;
