@@ -17,8 +17,9 @@
 	$name       = $_GET['name'];
 	$country    = $_GET['country'];
 	$genre      = $_GET['genre'];
+	$password   = $_GET['password'];
 
-	$sql = "INSERT INTO users (name,country,genre,created) VALUES ('$name', '$country', '$genre',NOW())";
+	$sql = "INSERT INTO users (name,country,genre,password,created) VALUES ('$name', '$country', '$genre', '$password',NOW())";
 	$result_flag = mysql_query($sql);
 
 	//var_dump($sql);
@@ -31,13 +32,13 @@
 	   
 	}
 
-	$sql_select = "SELECT id,name,country,genre FROM users WHERE id= $id";
+	$sql_select = "SELECT id,name,country,genre,password FROM users WHERE id = $id";
 	$result = mysql_query($sql_select);
 
 	if ($result) {
 
 		//jsonに変更して表示
-		$arr = array('id' => $id, 'name' => $name, 'country' => $country, 'genre' => $genre);
+		$arr = array('id' => $id, 'name' => $name, 'country' => $country, 'genre' => $genre, 'password' => $password);
 		//echo json_encode($result);
 		echo json_encode($arr);
 
