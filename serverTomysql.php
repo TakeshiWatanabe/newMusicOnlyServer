@@ -25,6 +25,8 @@
 	//var_dump($sql);
 
 	$id = mysql_insert_id();
+	// $name = "name";
+	// $password = "vnovsm";
 
 	//var_dump($id);
 
@@ -32,8 +34,7 @@
 	   
 	}
 
-	$sql_select = "SELECT id,name,country,genre,password FROM users WHERE id = $id";
-	$result = mysql_query($sql_select);
+	$result = mysql_query('SELECT id,name,country,genre,password FROM users');
 
 	if ($result) {
 
