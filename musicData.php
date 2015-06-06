@@ -15,14 +15,13 @@
 
 	// 変数を用意
 	$userId       = $_GET['userId'];
-	$userName     = $_GET['userName'];
-	$musicId      = $_GET['musicId'];
+	$trackId      = $_GET['trackId'];
 	$musicTittle  = $_GET['musicTittle'];
 	$artistName   = $_GET['artistName'];
 	$jacketUrl     = $_GET['jacketUrl'];
 	$previewUrl   = $_GET['previewUrl'];
 
-	$sql = "INSERT INTO musics (userId,userName,musicId,musicTittle,artistName,jacketUrl,previewUrl,created) VALUES ('$userId','$userName','$musicId','$musicTittle','$artistName','$jacketUrl','$previewUrl',NOW())";
+	$sql = "INSERT INTO musics (userId,trackId,musicTittle,artistName,jacketUrl,previewUrl,created) VALUES ('$userId','$trackId','$musicTittle','$artistName','$jacketUrl','$previewUrl',NOW())";
 	$result_flag = mysql_query($sql);
 
 	//var_dump($sql);
@@ -38,12 +37,12 @@
 	   
 	}
 
-	$result = mysql_query('SELECT userId,userName,musicId,musicTittle,artistName,jacketUrl,previewUrl FROM musics');
+	$result = mysql_query('SELECT userId,trackId,musicTittle,artistName,jacketUrl,previewUrl FROM musics');
 
 	if ($result) {
 
 		//jsonに変更して表示
-		$arr = array('userId' => $userId, 'userName' => $userName, 'musicId' => $musicId, 'musicTittle' => $musicTittle, 'artistName' => $artistName, 'jacketUrl' => $jacketUrl, 'previewUrl' => $previewUrl);
+		$arr = array('userId' => $userId, 'trackId' => $trackId, 'musicTittle' => $musicTittle, 'artistName' => $artistName, 'jacketUrl' => $jacketUrl, 'previewUrl' => $previewUrl);
 		//echo json_encode($result);
 		echo json_encode($arr);
 
