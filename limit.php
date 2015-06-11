@@ -9,11 +9,13 @@
 <link ref="stylesheet" href="style.css">
 </head>
 <body>
+	<div>
 	<font size="7">プライバシーポリシー</font> <br>
 		<p>soundUpアプリ プライバシーポリシー</p><br>
 		<p>soundUpアプリにおけるユーザー情報を以下の通り取り扱います。</p>
-		<font size="7">適用範囲</font><br>
-		<p></p>
+			<font size="7">適用範囲</font><br>
+			<p></p>
+	<div>
 
 
 </body>

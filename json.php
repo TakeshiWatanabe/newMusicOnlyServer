@@ -1,8 +1,10 @@
 <?php
 
+require_once('dbconect.php');
+
 //データベースへの接続
-$db = mysqli_connect('localhost', 'root', 'camp2015', 'iosMusic') or die(mysqli_connect_error());
-mysqli_set_charset($db, 'utf8');
+// $db = mysqli_connect('localhost', 'root', 'camp2015', 'iosMusic') or die(mysqli_connect_error());
+// mysqli_set_charset($db, 'utf8');
 
 
 //データの取得

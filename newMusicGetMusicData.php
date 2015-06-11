@@ -1,19 +1,23 @@
 <?php
-	// MySqlへの接続
-	$link = mysql_connect('localhost', 'root', 'camp2015');
-	if (!$link) {
-	
-	}
 
-	// データベースへの接続
-	$db_selected = mysql_select_db('iosMusic', $link);
-	if (!$db_selected){
+	require_once('dbconect.php');
+
+	// MySqlへの接続
+	// $link = mysql_connect('localhost', 'root', 'camp2015');
+	// if (!$link) {
+	
+	// }
+
+	// // データベースへの接続
+	// $db_selected = mysql_select_db('iosMusic', $link);
+	// if (!$db_selected){
 	   
-	}
+	// }
 
 	mysql_set_charset('utf8');
 
 	// 変数を用意
+	//$id           = $_GET['id'];
 	$userId       = $_GET['userId'];
 	$userName     = $_GET['userName'];
 	$musicId      = $_GET['musicId'];
@@ -27,7 +31,7 @@
 	    die('クエリーが失敗しました。'.mysql_error());
 	}
 
-	//var_dump($result);
+	var_dump($result);
 	while ($row = mysql_fetch_assoc($result)) {
 	    // print('<p>');
 	    // print('userId='       .$row['userId']);

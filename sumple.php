@@ -1,4 +1,6 @@
 <?php
+    require_once('dbconect.php');
+
     
     if (is_uploaded_file($_FILES["file"]["tmp_name"])) {
     	//var_dump($_FILES);

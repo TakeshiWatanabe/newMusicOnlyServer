@@ -1,19 +1,23 @@
 <?php
-	// MySqlへの接続
-	$link = mysql_connect('localhost', 'root', 'camp2015');
-	if (!$link) {
-	    
-	}
 
-	// データベースへの接続
-	$db_selected = mysql_select_db('iosMusic', $link);
-	if (!$db_selected){
+	require_once('dbconect.php');
+
+	// MySqlへの接続
+	// $link = mysql_connect('localhost', 'root', 'camp2015');
+	// if (!$link) {
+	    
+	// }
+
+	// // データベースへの接続
+	// $db_selected = mysql_select_db('iosMusic', $link);
+	// if (!$db_selected){
 	   
-	}
+	// }
 
 	mysql_set_charset('utf8');
 
 	// 変数を用意
+	$id         = $_GET['id'];
 	$name       = $_GET['name'];
 	$country    = $_GET['country'];
 	$genre      = $_GET['genre'];
@@ -34,7 +38,7 @@
 	   
 	}
 
-	$result = mysql_query('SELECT id,name,country,genre,password FROM users');
+	$result = mysql_query("SELECT id,name,country,genre,password FROM users where id = $id");
 
 	if ($result) {
 

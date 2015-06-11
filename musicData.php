@@ -1,49 +1,34 @@
 <?php
-	// MySqlへの接続
-	$link = mysql_connect('localhost', 'root', 'camp2015');
-	if (!$link) {
-	    
-	}
+// mainViewで使用
 
-	// データベースへの接続
-	$db_selected = mysql_select_db('iosMusic', $link);
-	if (!$db_selected){
-	   
-	}
+	require_once('dbconect.php');
 
 	mysql_set_charset('utf8');
 
 	// 変数を用意
 	$userId       = $_GET['userId'];
 	$trackId      = $_GET['trackId'];
-	$musicTittle  = $_GET['musicTittle'];
+	$musicTittle  = $_GET['musicTittle'];	
 	$artistName   = $_GET['artistName'];
-	$jacketUrl     = $_GET['jacketUrl'];
+	$jacketUrl    = $_GET['jacketUrl'];
 	$previewUrl   = $_GET['previewUrl'];
+	$goodCount    = $_GET['goodCount'];
 
-	$sql = "INSERT INTO musics (userId,trackId,musicTittle,artistName,jacketUrl,previewUrl,created) VALUES ('$userId','$trackId','$musicTittle','$artistName','$jacketUrl','$previewUrl',NOW())";
-	$result_flag = mysql_query($sql);
-
-	//var_dump($sql);
-
-	$id = mysql_insert_id();
-	// $name = "name";
-	// $password = "vnovsm";
-
-	//var_dump($id);
-
-	if (!$result_flag) {
-		//var_dump(1);
-	   
-	}
-
-	$result = mysql_query('SELECT userId,trackId,musicTittle,artistName,jacketUrl,previewUrl FROM musics');
+	// ドメインを変えた時にURLの変更が必要
+	$result = mysql_query('SELECT userId, trackId, musicTittle, artistName, jacketUrl, previewUrl, goodCount, users.name AS \'userName\', CONCAT( \'http://takeshi-w.sakura.ne.jp/userImg/prof\', userId, \'.png\' ) AS \'userProfImage\' FROM musics INNER JOIN users ON musics.userId = users.id');
+	// $result = mysql_query('SELECT * FROM musics');
 
 	if ($result) {
+		$i = 0;
+		while ($page = mysql_fetch_assoc($result)) {
 
+		// var_dump($page);
 		//jsonに変更して表示
-		$arr = array('userId' => $userId, 'trackId' => $trackId, 'musicTittle' => $musicTittle, 'artistName' => $artistName, 'jacketUrl' => $jacketUrl, 'previewUrl' => $previewUrl);
+		// $arr = array('userId' => $userId, 'trackId' => $trackId, 'musicTittle' => $musicTittle, 'artistName' => $artistName, 'jacketUrl' => $jacketUrl, 'previewUrl' => $previewUrl);
 		//echo json_encode($result);
+		$arr[$i] = array('userId' => $page['userId'], 'trackId' => $page['trackId'], 'musicTittle' => $page['musicTittle'], 'artistName' => $page['artistName'], 'jacketUrl' => $page['jacketUrl'], 'previewUrl' => $page['previewUrl'], 'goodCount' => $page['goodCount'], 'userProfImage' => $page['userProfImage'], 'userName' => $page['userName']);
+		$i++;
+		}
 		echo json_encode($arr);
 
 	}else{
