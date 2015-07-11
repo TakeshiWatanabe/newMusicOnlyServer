@@ -6,23 +6,24 @@ require_once('dbconect.php');
 	mysql_set_charset('utf8');
 
 	// 変数を用意
-	$id          = $_GET['id'];
+	//$id          = $_GET['id'];
 	$userId      = $_GET['userId'];
 	$musicId     = $_GET['musicId'];
 	
 	//ページ数を計算
-        $count ="SELECT count(*) as cnt FROM goodCountes";
-        $count_result = mysql_query($count, $link) or die("クエリの送信に失敗しました。<br />SQL:".$count);
-        $count_num = mysql_fetch_array($count_result);
+    $count ="SELECT count(*) as cnt FROM goodCountes";
+    $count_result = mysql_query($count, $link) or die("クエリの送信に失敗しました。<br />SQL:".$count);
+    $count_num = mysql_fetch_array($count_result);
         
-        if($count_num['cnt']%$col==0){
-            $pages= floor($count_num['cnt']/$col)-1;
-        }else{                
-          $pages = floor($count_num['cnt']/$col);
-        }
+    if($count_num['cnt']%$col==0){
+       $pages= floor($count_num['cnt']/$col)-1;
+    }else{                
+       $pages = floor($count_num['cnt']/$col);
+    }
+
 
 	//var_dump($row);
-	$sql = “INSERT INTO goodCountes (userId,musicId,created)VALUES($userId,$musicId,NOW());”;
+    $sql = "INSERT INTO goodCountes (userId,musicId,created)VALUES($userId,$musicId,NOW());";
 	$result = mysql_query($sql);
 	//var_dump($sql);
 
@@ -34,6 +35,13 @@ require_once('dbconect.php');
 
 	}else{
 		
+	}
+
+
+	// カウント回数取得
+	$goodcount = mysql_query ("select musicId, count(musicId) from goodCountes group by musicId");
+	while ($goodCount_echo = mysql_fetch_row($goodCount)) {
+		$goodCount_echo[] = $goodCount_echo;
 	}
 
 	// データベースから切断
