@@ -15,7 +15,8 @@
 	$goodCount    = $_GET['goodCount'];
 
 	// ドメインを変えた時にURLの変更が必要
-	$result = mysql_query('SELECT userId, trackId, musicTittle, artistName, jacketUrl, previewUrl, goodCount, users.name AS \'userName\', CONCAT( \'http://takeshi-w.sakura.ne.jp/userImg/prof\', userId, \'.png\' ) AS \'userProfImage\' FROM musics INNER JOIN users ON musics.userId = users.id');
+	$result = mysql_query('SELECT userId, trackId, musicTittle, artistName, jacketUrl, previewUrl, IFNULL(`count_favorites`.`count_number`,0) `count_number` , users.name AS `userName` , CONCAT( \'http://takeshi-w.sakura.ne.jp/userImg/prof\', userId, \'.png\' ) AS `userProfImage` FROM musics INNER JOIN users ON musics.userId = users.id LEFT OUTER JOIN (SELECT `musicId` , COUNT( * ) AS `count_number` FROM `goodCountes` GROUP BY `musicId`) `count_favorites` ON `musics`.`id` = `count_favorites`.`musicId`');
+
 	// $result = mysql_query('SELECT * FROM musics');
 
 	if ($result) {
